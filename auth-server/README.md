@@ -16,6 +16,6 @@ Implementar um filtro do Feign para repassar o token do usuário nas chamadas en
 
 mvn clean package spring-boot:repackage
 
-docker build --build-arg JAR_FILE=target/*.jar -t cervejaria-auth .
+docker build --build-arg JAR_FILE=target/*.jar -t auth-server .
 
-docker run --name cervejaria-auth -d -p 8088:8088 cervejaria-auth
+docker run --name auth-server -d -p 8088:8088 --network microservice-network auth-server
