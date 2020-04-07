@@ -16,8 +16,8 @@ Não faz sentido expor o Eureka na web
 
 # Docker: Para executar a aplicação em um container, executar os seguintes comandos na pasta "/zuul":
 
-mvn clean package spring-boot:repackage
+mvn clean package -DSPRING_PROFILES_ACTIVE=dev -DCONFIG_SERVER_CONTEXT=localhost   spring-boot:repackage
 
-docker build --build-arg JAR_FILE=target/*.jar -t cervejaria-zuul .
+docker build --build-arg JAR_FILE=target/*.jar -t zull-server .
 
-docker run --name cervejaria-zuul -d -p 5555:5555 cervejaria-zuul
+docker run --name zull-server -d -p 5555:5555 --network microservice-network zull-server
