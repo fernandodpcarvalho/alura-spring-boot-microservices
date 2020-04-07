@@ -2,26 +2,28 @@
 
 Sistema de vendas on line de cervejas artesanais
 
-#MySql: Instruções
+# MySql: Instruções
 
-# Para subir o container com o MySql, digite o seguinte comando na pasta do projeto, onde se encontra o arquivo docker-compose.yaml
+# Para rodar, digite o seguinte comando na pasta do projeto, onde se encontra o arquivo docker-compose.yaml
 
 docker-compose up -d
 
 
-# Para acessar o bash do container do MySql, executar o seguinte comando:
+# MySql:
 
-docker exec -it cervejaria-mysql bash
+* Para acessar o bash do container do MySql, executar o seguinte comando:
+
+docker exec -it mysql-server bash
 
 
-# Para logar no MySql:
+* Para logar no MySql:
 
 mysql -u cervejaria -p 
 
 password: cervejaria
 
-
-######## Spring 
+###################################
+# Spring 
 
 # Spring Cloud Netflix Ribbon
 
@@ -51,7 +53,7 @@ https://medium.com/@melardev/spring-cloud-with-ribbon-load-balancer-f334d87e3d66
 https://medium.com/java-e-arquitetura-de-forma-mastigada/iniciando-com-feign-19c2b0d7d1c3
 
 
-#Logs Distribuídos
+# Logs Distribuídos
 
 Cada microsserviço (e instância dele) possui o seu log
 
