@@ -18,6 +18,6 @@ https://medium.com/swlh/spring-cloud-service-discovery-with-eureka-16f32068e5c7
 
 mvn clean package spring-boot:repackage
 
-docker build --build-arg JAR_FILE=target/*.jar -t cervejaria-eureka .
+docker build --build-arg JAR_FILE=target/*.jar -t eureka-server .
 
-docker run --name cervejaria-eureka -d -p 8761:8761 cervejaria-eureka
+docker run --name eureka-server -d -p 8761:8761 --network microservice-network eureka-server
