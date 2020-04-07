@@ -12,6 +12,6 @@ https://medium.com/@mool.smreeti/spring-cloud-config-server-414310d01ceb
 
 mvn clean package spring-boot:repackage
 
-docker build --build-arg JAR_FILE=target/*.jar -t cervejaria-config-server .
+docker build --build-arg JAR_FILE=target/*.jar -t config-server .
 
-docker run --name cervejaria-config-server -d -p 8888:8888 cervejaria-config-server
+docker run --name config-server -d -p 8888:8888 --network microservice-network config-server
