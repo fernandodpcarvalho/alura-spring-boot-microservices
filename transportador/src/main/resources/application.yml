@@ -1,0 +1,5 @@
+server:  port: 8082
+
+eureka:  client:    register-with-eureka: true
+    fetch-registry: true
+    service-url:      defaultZone: http://${eureka-context}:8761/eureka

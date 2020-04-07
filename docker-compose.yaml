@@ -1,0 +1,82 @@
+version: '3'
+services:
+    db:
+      image: mysql
+      environment:
+        MYSQL_DATABASE: 'cervejaria'
+        MYSQL_USER: 'cervejaria'
+        MYSQL_PASSWORD: 'cervejaria'
+        MYSQL_ROOT_PASSWORD: 'root'
+      networks:
+          - microservice-network
+      ports:
+        - '3306:3306'
+      expose:
+        - '3306'
+      container_name: mysql-server
+      volumes:
+          - microservice-mysql:/var/lib/mysql
+    config-server:
+        build:
+            context: ./config-server/
+            dockerfile: Dockerfile
+            args:
+              JAR_FILE: target/*.jar
+        container_name: config-server
+        image: config-server:latest
+        ports:
+            - "8888:8888"
+        expose:
+            - 8888
+        networks:
+            - microservice-network
+    auth-server:
+        build:
+            context: ./auth-server/
+            dockerfile: Dockerfile
+            args:
+              JAR_FILE: target/*.jar
+        container_name: auth-server
+        image: auth-server:latest
+        ports:
+            - "8088:8088"
+        expose:
+            - 8088
+        networks:
+            - microservice-network
+    eureka-server:
+        build:
+            context: ./eureka-server/
+            dockerfile: Dockerfile
+            args:
+              JAR_FILE: target/*.jar
+        container_name: eureka-server
+        image: eureka-server:latest
+        ports:
+            - "8761:8761"
+        expose:
+            - 8761
+        networks:
+            - microservice-network
+    zuul-server:
+        build:
+            context: ./zuul-server/
+            dockerfile: Dockerfile
+            args:
+              JAR_FILE: target/*.jar
+        container_name: zuul-server
+        image: zuul-server:latest
+        ports:
+            - "5555:5555"
+        expose:
+            - 8088
+        networks:
+            - microservice-network
+        environment:
+         - SPRING_PROFILES_ACTIVE=default
+         - CONFIG_SERVER_CONTEXT=config-server
+volumes:
+  microservice-mysql:
+networks:
+  microservice-network:
+    external: true

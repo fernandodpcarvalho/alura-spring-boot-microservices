@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    password: cervejaria
+    username: cervejaria
+    url: jdbc:mysql://mysql-server:3306/cervejaria
+  jpa:
+    hibernate:
+      ddl-auto: update
+eureka-context: eureka-server
+auth-context: auth-server
