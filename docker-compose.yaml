@@ -69,7 +69,58 @@ services:
         ports:
             - "5555:5555"
         expose:
-            - 8088
+            - 5555
+        networks:
+            - microservice-network
+        environment:
+         - SPRING_PROFILES_ACTIVE=default
+         - CONFIG_SERVER_CONTEXT=config-server
+    fornecedor:
+        build:
+            context: ./fornecedor/
+            dockerfile: Dockerfile
+            args:
+              JAR_FILE: target/*.jar
+        container_name: fornecedor
+        image: fornecedor:latest
+        ports:
+            - "8081:8081"
+        expose:
+            - 8081
+        networks:
+            - microservice-network
+        environment:
+         - SPRING_PROFILES_ACTIVE=default
+         - CONFIG_SERVER_CONTEXT=config-server
+    loja:
+        build:
+            context: ./loja/
+            dockerfile: Dockerfile
+            args:
+              JAR_FILE: target/*.jar
+        container_name: loja
+        image: loja:latest
+        ports:
+            - "8080:8080"
+        expose:
+            - 8080
+        networks:
+            - microservice-network
+        environment:
+         - SPRING_PROFILES_ACTIVE=default
+         - CONFIG_SERVER_CONTEXT=config-server
+    transportador:
+        build:
+            context: ./transportador/
+            dockerfile: Dockerfile
+            args:
+              JAR_FILE: target/*.jar
+        container_name: transportador
+        image: transportador:latest
+        ports:
+            - "8082:8082"
+        expose:
+            - 8082
         networks:
             - microservice-network
         environment:
